@@ -51,7 +51,7 @@ alpha = st.sidebar.slider(
 df['Smoothed Traffic'] = df[road].ewm(alpha=alpha, adjust=False).mean()
 
 
-st.subheader(r"📈 Metrics Summary for " + road)
+st.subheader(r"Metrics Summary for " + road)
 col1, col2, col3 = st.columns(3)
 
 latest_actual = df[road].iloc[-1]
