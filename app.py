@@ -70,13 +70,13 @@ road = st.sidebar.selectbox(
 
 alpha = st.sidebar.slider(
     "Alpha (α) - Level Smoothing",
-    0.01, 1.0, 0.30, step=0.05,
+    0.01, 1.0, 0.30, step=0.01,
     help="Weight given to the most recent actual traffic observation."
 )
 
 beta = st.sidebar.slider(
     "Beta (β) - Trend Smoothing",
-    0.01, 1.0, 0.20, step=0.05,
+    0.01, 1.0, 0.20, step=0.01,
     help="Controls how fast the system adapts to changes in the trajectory growth."
 )
 
