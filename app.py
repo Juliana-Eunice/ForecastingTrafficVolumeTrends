@@ -10,22 +10,22 @@ st.set_page_config(page_title="Metro Manila Traffic Forecasting Tool", layout="w
 st.title("Traffic Volume Forecasting Simulation")
 st.markdown("""
 This dashboard implements **Holt's Linear Trend Method (Double Exponential Smoothing)** to analyze 
-historical Annual Average Daily Traffic (AADT) data and project traffic volumes for **2026, 2027, and 2028** across selected high-traffic roads in Metro Manila[cite: 67, 68].
+historical Annual Average Daily Traffic (AADT) data and project traffic volumes for **2026, 2027, and 2028** across selected high-traffic roads in Metro Manila.
 """)
 
-# 2. Math Reference Section (as requested by the research methodology [cite: 80])
+# 2. Math Reference Section (as requested by the research methodology)
 with st.expander("Mathematical Framework (Holt's Linear Trend Method)", expanded=False):
     st.markdown("### 1. Level Equation")
     st.latex(r"L_{t} = \alpha A_{t} + (1 - \alpha)(L_{t-1} + T_{t-1})")
-    st.caption("Updates the estimated traffic volume level for the current year based on the actual volume (At)[cite: 82, 83].")
+    st.caption("Updates the estimated traffic volume level for the current year based on the actual volume (At).")
     
     st.markdown("### 2. Trend Equation")
     st.latex(r"T_{t} = \beta(L_{t} - L_{t-1}) + (1 - \beta)T_{t-1}")
-    st.caption("Updates the estimated rate of increase or decrease in traffic volume[cite: 92, 93].")
+    st.caption("Updates the estimated rate of increase or decrease in traffic volume.")
     
     st.markdown("### 3. Forecast Equation")
     st.latex(r"F_{t+m} = L_{t} + m T_{t}")
-    st.caption("Generates predictions forward by m periods (years ahead)[cite: 100, 103].")
+    st.caption("Generates predictions forward by m periods (years ahead).")
 
 # 3. Bulletproof Data Loader
 @st.cache_data
@@ -71,13 +71,13 @@ road = st.sidebar.selectbox(
 alpha = st.sidebar.slider(
     "Alpha (α) - Level Smoothing",
     0.01, 1.0, 0.30, step=0.05,
-    help="Weight given to the most recent actual traffic observation[cite: 83]."
+    help="Weight given to the most recent actual traffic observation."
 )
 
 beta = st.sidebar.slider(
     "Beta (β) - Trend Smoothing",
     0.01, 1.0, 0.20, step=0.05,
-    help="Controls how fast the system adapts to changes in the trajectory growth[cite: 93]."
+    help="Controls how fast the system adapts to changes in the trajectory growth."
 )
 
 # 5. Implementing Holt's Linear Trend Math Engine
@@ -145,7 +145,7 @@ ax.plot(df_fit['YEAR'], df_fit['Value'], linestyle=':', color='#aec7e8', linewid
 connect_year = [df_fit['YEAR'].iloc[-1]] + df_fore['YEAR'].tolist()
 connect_val = [df_fit[road].iloc[-1]] + df_fore['Value'].tolist()
 
-ax.plot(connect_year, connect_val, marker='s', linestyle='--', color='#d62728', linewidth=2.5, label="Holt's Forecast (2026-2028) [cite: 67]")
+ax.plot(connect_year, connect_val, marker='s', linestyle='--', color='#d62728', linewidth=2.5, label="Holt's Forecast (2026-2028)")
 
 ax.set_title(f'AADT Evolution Trend and Forecast Profile: {road}', fontsize=14, fontweight='bold', pad=12)
 ax.set_xlabel('Timeline (Years)', fontsize=11)
